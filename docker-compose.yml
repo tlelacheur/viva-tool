@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: viva_backend
+    restart: unless-stopped
+    env_file: .env
+    volumes:
+      - viva_data:/data/uploads
+    ports:
+      - "8000:8000"
+    networks:
+      - viva_net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: viva_frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - viva_net
+
+volumes:
+  viva_data:
+
+networks:
+  viva_net:
+    driver: bridge

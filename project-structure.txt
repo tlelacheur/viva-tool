@@ -1,0 +1,24 @@
+viva-poc/
+├── shell.nix
+├── docker-compose.yml
+├── .env.example
+├── deploy.sh
+├── upgrade.sh
+├── backend/
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── config.py
+│   │   ├── openrouter.py
+│   │   ├── parser.py
+│   │   └── livekit_worker.py
+├── frontend/
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── svelte.config.js
+│   ├── vite.config.js
+│   └── src/
+│       ├── App.svelte
+│       └── main.js
+└── IMPLEMENTATION_PLAYBOOK.md

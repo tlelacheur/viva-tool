@@ -1,0 +1,19 @@
+# Environment variables / secrets
+.env
+
+# Dependencies & Build outputs
+node_modules/
+dist/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+
+# Storage & Data artifacts
+data/
+uploads/
+
+# OS & IDE
+.DS_Store
+.idea/
+.vscode/
