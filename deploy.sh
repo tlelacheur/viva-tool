@@ -18,10 +18,22 @@ if [ ! -f .env ]; then
   exit 1
 fi
 
-echo "==> Building and launching containers with low-resource caps..."
+echo "==> Opening firewall ports (80, 3000, 8000)..."
+if command -v ufw >/dev/null 2>&1; then
+  sudo ufw allow 80/tcp || true
+  sudo ufw allow 3000/tcp || true
+  sudo ufw allow 8000/tcp || true
+fi
+
+echo "==> Building and launching containers..."
 docker compose build
 docker compose up -d
 
-echo "==> Deployment complete."
-echo "Frontend: http://localhost:3000"
-echo "Backend:  http://localhost:8000/docs"
+DROPLET_IP=$(curl -s https://api.ipify.org || echo "YOUR_DROPLET_IP")
+
+echo "=================================================="
+echo " ==> VivaTool Deployed Successfully!"
+echo " Access Frontend: http://${DROPLET_IP}"
+echo " Alternative URL: http://${DROPLET_IP}:3000"
+echo " Backend API:     http://${DROPLET_IP}:8000/docs"
+echo "=================================================="
