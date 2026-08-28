@@ -18,9 +18,10 @@ if [ ! -f .env ]; then
   exit 1
 fi
 
-echo "==> Opening firewall ports (80, 3000, 8000)..."
+echo "==> Opening firewall ports (80, 443, 3000, 8000)..."
 if command -v ufw >/dev/null 2>&1; then
   sudo ufw allow 80/tcp || true
+  sudo ufw allow 443/tcp || true
   sudo ufw allow 3000/tcp || true
   sudo ufw allow 8000/tcp || true
 fi
@@ -32,8 +33,8 @@ docker compose up -d
 DROPLET_IP=$(curl -s https://api.ipify.org || echo "YOUR_DROPLET_IP")
 
 echo "=================================================="
-echo " ==> VivaTool Deployed Successfully!"
-echo " Access Frontend: http://${DROPLET_IP}"
-echo " Alternative URL: http://${DROPLET_IP}:3000"
-echo " Backend API:     http://${DROPLET_IP}:8000/docs"
+echo " ==> VivaTool Deployed Successfully with HTTPS!"
+echo " Secure HTTPS (Mic Enabled): https://${DROPLET_IP}"
+echo " Alternative HTTP URL:       http://${DROPLET_IP}"
+echo " Backend API:                http://${DROPLET_IP}:8000/docs"
 echo "=================================================="
